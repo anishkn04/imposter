@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Nepali Imposter Game</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #151f32;
+      --panel-bg: #1e293b;
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 12px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 450px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      letter-spacing: -0.5px;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Player Chips & Input */
+    .player-input-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      background: var(--panel-bg);
+      border: 1px solid var(--border);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent);
+    }
+
+    .btn-add {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .player-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      max-height: 140px;
+      overflow-y: auto;
+      background: var(--panel-bg);
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .player-chip {
+      background: #0f172a;
+      padding: 6px 12px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .player-chip .remove-btn {
+      color: var(--danger);
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    .counter-control {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--panel-bg);
+      border-radius: 12px;
+      padding: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .counter-btn {
+      width: 40px;
+      height: 40px;
+      background: var(--card-bg);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .counter-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    select {
+      width: 100%;
+      background: var(--panel-bg);
+      color: white;
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--accent);
+      color: white;
+      margin-top: 10px;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: #334155;
+      margin-top: 8px;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+    }
+
+    /* Pass & Reveal */
+    .player-tag {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .card {
+      min-height: 200px;
+      background: var(--panel-bg);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 18px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 2px dashed rgba(255, 255, 255, 0.15);
+    }
+
+    .card.revealed.civilian {
+      border: 2px solid var(--success);
+    }
+
+    .card.revealed.imposter {
+      border: 2px solid var(--danger);
+    }
+
+    .category-badge {
+      font-size: 0.8rem;
+      padding: 4px 12px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .word-display {
+      font-size: 2.2rem;
+      font-weight: 800;
+      word-break: break-word;
+    }
+
+    .role-badge {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+
+    .role-badge.civilian {
+      background: rgba(34, 197, 94, 0.2);
+      color: var(--success);
+    }
+
+    .role-badge.imposter {
+      background: rgba(239, 68, 68, 0.2);
+      color: var(--danger);
+    }
+
+    /* Order List & Discussion */
+    .order-box {
+      background: var(--panel-bg);
+      padding: 12px;
+      border-radius: 12px;
+      text-align: left;
+      margin: 14px 0;
+      border: 1px solid var(--border);
+    }
+
+    .order-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.9rem;
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+    }
+
+    .order-num {
+      width: 22px;
+      height: 22px;
+      background: #0f172a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .timer {
+      font-size: 2.5rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      margin: 10px 0;
+    }
+
+    /* Modal for custom words */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 16px;
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 400px;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Screen 1: Setup -->
+    <div id="screen-setup" class="screen active">
+      <h1>Nepali Imposter</h1>
+      <p class="subtitle">Offline Party Word Game</p>
+
+      <!-- Players Management -->
+      <div class="form-group">
+        <label>Player Names (<span id="player-count-num">4</span> players)</label>
+        <div class="player-input-row">
+          <input type="text" id="new-player-name" placeholder="Enter name (e.g. Aayush)..." maxlength="15" />
+          <button class="btn-add" onclick="addPlayer()">+ Add</button>
+        </div>
+        <div class="player-list" id="players-container"></div>
+      </div>
+
+      <!-- Imposters Count -->
+      <div class="form-group">
+        <label>Imposters</label>
+        <div class="counter-control">
+          <button class="counter-btn" onclick="adjustImposters(-1)">-</button>
+          <span class="counter-value" id="val-imposters">1</span>
+          <button class="counter-btn" onclick="adjustImposters(1)">+</button>
+        </div>
+      </div>
+
+      <!-- Category selection -->
+      <div class="form-group">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <label style="margin:0;">Word Category</label>
+          <a href="#" onclick="openCustomWordModal(); return false;" style="font-size:0.75rem; color:var(--accent); text-decoration:none;">+ Add Custom Words</a>
+        </div>
+        <select id="category-select">
+          <option value="all">🎲 All Categories (Random)</option>
+          <option value="Nepali Food">🥟 Nepali Food & Khaja</option>
+          <option value="Places in Nepal">🏔️ Places & Travel</option>
+          <option value="Daily Nepali Life">🛵 Daily Life & Transport</option>
+          <option value="Culture & Festivals">🪔 Festivals & Culture</option>
+          <option value="Gadgets & Common Tech">📱 Gadgets & Common Tech</option>
+          <option value="Nepali Animals">🦏 Animals & Wildlife</option>
+        </select>
+      </div>
+
+      <!-- Timer Selector -->
+      <div class="form-group">
+        <label>Discussion Timer</label>
+        <select id="timer-duration-select">
+          <option value="180">3 Minutes</option>
+          <option value="120">2 Minutes</option>
+          <option value="60">1 Minute</option>
+          <option value="300">5 Minutes</option>
+          <option value="0">No Timer (Manual)</option>
+        </select>
+      </div>
+
+      <button class="btn" onclick="startGame()">Start Game</button>
+    </div>
+
+    <!-- Screen 2: Pass & Reveal -->
+    <div id="screen-pass" class="screen">
+      <p style="color: var(--text-muted); font-size: 0.9rem;">Pass the device to:</p>
+      <div class="player-tag" id="current-player-label">Aayush</div>
+
+      <div class="card" id="card-display">
+        <div id="card-hidden-msg">
+          <p style="font-size: 1.1rem; font-weight: 600;">🔒 Tap below to see your card</p>
+        </div>
+        <div id="card-content" style="display: none;">
+          <span class="category-badge" id="card-category">Food</span>
+          <div class="word-display" id="card-word">Momo</div>
+          <div class="role-badge" id="card-role">Civilian</div>
+        </div>
+      </div>
+
+      <button class="btn" id="reveal-toggle-btn" onclick="toggleReveal()">Tap to Reveal</button>
+      <button class="btn btn-secondary" id="next-player-btn" style="display:none;" onclick="nextPlayer()">Next Player ➔</button>
+    </div>
+
+    <!-- Screen 3: Discussion & Clue Round -->
+    <div id="screen-play" class="screen">
+      <h1>Clue Round!</h1>
+      <p class="subtitle">Each player gives 1 clue. Catch the Imposter!</p>
+
+      <div class="category-badge" id="discussion-category">Category: Nepali Food</div>
+
+      <!-- Turn Speaking Order -->
+      <div class="order-box">
+        <p style="font-size: 0.75rem; color: var(--text-muted); font-weight:700; margin-bottom:8px; text-transform:uppercase;">Speaking Order:</p>
+        <div id="speaking-order-list"></div>
+      </div>
+
+      <!-- Timer -->
+      <div id="timer-wrapper">
+        <div class="timer" id="timer-display">03:00</div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn" style="flex:1;" id="timer-btn" onclick="toggleTimer()">Pause</button>
+          <button class="btn btn-secondary" style="flex:1;" onclick="resetTimer()">Reset</button>
+        </div>
+      </div>
+
+      <button class="btn btn-danger" style="margin-top: 16px;" onclick="revealResults()">End Round & Reveal Imposters</button>
+    </div>
+
+    <!-- Screen 4: Results -->
+    <div id="screen-results" class="screen">
+      <h1>Game Over!</h1>
+      <p class="subtitle">All secrets revealed</p>
+
+      <div style="background: var(--panel-bg); padding: 14px; border-radius: 12px; margin-bottom: 16px; border: 1px solid var(--border);">
+        <p style="color: var(--text-muted); font-size: 0.8rem;">THE SECRET WORD WAS</p>
+        <h2 style="color: var(--success); font-size: 2rem; margin-top:4px;" id="result-word">Momo</h2>
+      </div>
+
+      <div id="results-list" style="margin-bottom: 16px;"></div>
+
+      <button class="btn" onclick="returnToSetup()">Play Again</button>
+    </div>
+
+    <!-- Modal: Custom Words Adder -->
+    <div class="modal" id="custom-modal">
+      <div class="modal-content">
+        <h3 style="margin-bottom: 12px;">Add Custom Words</h3>
+        <div class="form-group">
+          <label>Category Name</label>
+          <input type="text" id="custom-cat-name" placeholder="e.g. Nepali Memes, Bollywood" />
+        </div>
+        <div class="form-group">
+          <label>Words (comma-separated)</label>
+          <input type="text" id="custom-cat-words" placeholder="e.g. Sano Bhai, Rajesh Hamal, Dhurmus" />
+        </div>
+        <button class="btn" onclick="saveCustomWords()">Save Category</button>
+        <button class="btn btn-secondary" onclick="closeCustomWordModal()">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Initial Base Word Bank
+    const DEFAULT_WORD_BANK = {
+      "Nepali Food": [
+        "Momo", "Chowmein", "Chatpate", "Pani Puri", "Sel Roti", 
+        "Dal Bhat", "Dhido", "Thukpa", "Sekuwa", "Sukuti", 
+        "Yomari", "Bara", "Gundruk", "Achar", "Chiya", "Lassi"
+      ],
+      "Places in Nepal": [
+        "Pokhara", "Sauraha", "Thamel", "Pashupatinath", "Boudhanath", 
+        "Nagarkot", "Everest", "Rara Lake", "Phewa Lake", "Dharan", 
+        "Mustang", "Lumbini", "Swayambhunath", "Bandipur"
+      ],
+      "Daily Nepali Life": [
+        "Pathao", "Safa Tempo", "Micro Bus", "Loadshedding", "Chappal", 
+        "Dhunge Dhara", "Khukuri", "Dhaka Topi", "Doko", "Nanglo", 
+        "Jhola", "Mitho Paan", "Pressure Cooker", "Gatta"
+      ],
+      "Culture & Festivals": [
+        "Dashain", "Tihar", "Chhath", "Holi", "Teej", 
+        "Shivaratri", "Deusi Bhailo", "Tika", "Ping", "Dakshina"
+      ],
+      "Gadgets & Common Tech": [
+        "Smartphone", "Laptop", "Earbuds", "Instagram", "TikTok", 
+        "WiFi", "YouTube", "Smartwatch", "Power Bank", "Headphones"
+      ],
+      "Nepali Animals": [
+        "Danfe", "One-horned Rhino", "Royal Bengal Tiger", "Yak", 
+        "Hatti (Elephant)", "Kukur (Dog)", "Biralo (Cat)", "Bandar (Monkey)"
+      ]
+    };
+
+    let wordBank = { ...DEFAULT_WORD_BANK };
+    let playerNames = ["Aayush", "Bipul", "Sita", "Rohan"];
+    let imposterCount = 1;
+    let roles = []; // holds objects { name: "...", role: "civilian"|"imposter" }
+    let currentPlayerIndex = 0;
+    let selectedCategory = "";
+    let selectedWord = "";
+    let isCardRevealed = false;
+    let timerTotalSeconds = 180;
+    let timerRemaining = 180;
+    let timerInterval = null;
+
+    // Load from LocalStorage
+    function initStorage() {
+      try {
+        const savedPlayers = localStorage.getItem("imposter_players");
+        if (savedPlayers) {
+          playerNames = JSON.parse(savedPlayers);
+        }
+        const savedCustomWords = localStorage.getItem("imposter_custom_words");
+        if (savedCustomWords) {
+          const parsed = JSON.parse(savedCustomWords);
+          wordBank = { ...wordBank, ...parsed };
+          updateCategoryDropdown();
+        }
+      } catch (e) {
+        console.error(e);
+      }
+      renderPlayerList();
+    }
+
+    function savePlayersToStorage() {
+      try {
+        localStorage.setItem("imposter_players", JSON.stringify(playerNames));
+      } catch (e) {}
+    }
+
+    // Players Management
+    function renderPlayerList() {
+      const container = document.getElementById("players-container");
+      container.innerHTML = "";
+      playerNames.forEach((name, idx) => {
+        const chip = document.createElement("div");
+        chip.className = "player-chip";
+        chip.innerHTML = `
+          <span>${name}</span>
+          <span class="remove-btn" onclick="removePlayer(${idx})">&times;</span>
+        `;
+        container.appendChild(chip);
+      });
+      document.getElementById("player-count-num").textContent = playerNames.length;
+      validateImposterCount();
+    }
+
+    function addPlayer() {
+      const input = document.getElementById("new-player-name");
+      const name = input.value.trim();
+      if (!name) return;
+      if (playerNames.includes(name)) {
+        alert("Player name already exists!");
+        return;
+      }
+      playerNames.push(name);
+      input.value = "";
+      savePlayersToStorage();
+      renderPlayerList();
+    }
+
+    // Allow Enter key to quickly add player
+    document.getElementById("new-player-name").addEventListener("keypress", (e) => {
+      if (e.key === "Enter") addPlayer();
+    });
+
+    function removePlayer(idx) {
+      if (playerNames.length <= 3) {
+        alert("Minimum 3 players are needed!");
+        return;
+      }
+      playerNames.splice(idx, 1);
+      savePlayersToStorage();
+      renderPlayerList();
+    }
+
+    function adjustImposters(delta) {
+      const maxImp = Math.max(1, playerNames.length - 2);
+      imposterCount = Math.max(1, Math.min(maxImp, imposterCount + delta));
+      document.getElementById("val-imposters").textContent = imposterCount;
+    }
+
+    function validateImposterCount() {
+      const maxImp = Math.max(1, playerNames.length - 2);
+      if (imposterCount > maxImp) {
+        imposterCount = maxImp;
+        document.getElementById("val-imposters").textContent = imposterCount;
+      }
+    }
+
+    // Screen Transitions
+    function switchScreen(screenId) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      document.getElementById(screenId).classList.add("active");
+    }
+
+    // Game Start
+    function startGame() {
+      if (playerNames.length < 3) {
+        alert("Add at least 3 players to start!");
+        return;
+      }
+
+      // Pick Category & Word
+      const catSelect = document.getElementById("category-select").value;
+      const categories = catSelect === "all" ? Object.keys(wordBank) : [catSelect];
+      selectedCategory = categories[Math.floor(Math.random() * categories.length)];
+      
+      const words = wordBank[selectedCategory];
+      selectedWord = words[Math.floor(Math.random() * words.length)];
+
+      // Assign Roles
+      roles = playerNames.map(name => ({ name, role: "civilian" }));
+      let assigned = 0;
+      while (assigned < imposterCount) {
+        const idx = Math.floor(Math.random() * roles.length);
+        if (roles[idx].role !== "imposter") {
+          roles[idx].role = "imposter";
+          assigned++;
+        }
+      }
+
+      currentPlayerIndex = 0;
+      preparePassScreen();
+      switchScreen("screen-pass");
+    }
+
+    // Pass and Reveal Phase
+    function preparePassScreen() {
+      isCardRevealed = false;
+      const player = roles[currentPlayerIndex];
+      document.getElementById("current-player-label").textContent = player.name;
+      document.getElementById("card-hidden-msg").style.display = "block";
+      document.getElementById("card-content").style.display = "none";
+      
+      const card = document.getElementById("card-display");
+      card.className = "card";
+
+      document.getElementById("reveal-toggle-btn").textContent = "Tap to Reveal";
+      document.getElementById("reveal-toggle-btn").style.display = "block";
+      document.getElementById("next-player-btn").style.display = "none";
+    }
+
+    function toggleReveal() {
+      const card = document.getElementById("card-display");
+      const player = roles[currentPlayerIndex];
+
+      if (!isCardRevealed) {
+        isCardRevealed = true;
+        document.getElementById("card-hidden-msg").style.display = "none";
+        document.getElementById("card-content").style.display = "block";
+        document.getElementById("card-category").textContent = "Category: " + selectedCategory;
+
+        if (player.role === "imposter") {
+          card.className = "card revealed imposter";
+          document.getElementById("card-word").textContent = "???";
+          document.getElementById("card-word").style.color = "var(--danger)";
+          const badge = document.getElementById("card-role");
+          badge.className = "role-badge imposter";
+          badge.textContent = "⚠️ YOU ARE THE IMPOSTER";
+        } else {
+          card.className = "card revealed civilian";
+          document.getElementById("card-word").textContent = selectedWord;
+          document.getElementById("card-word").style.color = "var(--text)";
+          const badge = document.getElementById("card-role");
+          badge.className = "role-badge civilian";
+          badge.textContent = "Civilian";
+        }
+
+        document.getElementById("reveal-toggle-btn").textContent = "Hide Card & Pass";
+      } else {
+        document.getElementById("card-hidden-msg").innerHTML = "<p>✅ Role memorized. Pass to next player!</p>";
+        document.getElementById("card-hidden-msg").style.display = "block";
+        document.getElementById("card-content").style.display = "none";
+        card.className = "card";
+
+        document.getElementById("reveal-toggle-btn").style.display = "none";
+        document.getElementById("next-player-btn").style.display = "block";
+      }
+    }
+
+    function nextPlayer() {
+      currentPlayerIndex++;
+      if (currentPlayerIndex < roles.length) {
+        preparePassScreen();
+      } else {
+        startDiscussion();
+      }
+    }
+
+    // Discussion Phase
+    function startDiscussion() {
+      // Create random order for clues
+      const shuffled = [...roles].sort(() => 0.5 - Math.random());
+      const orderList = document.getElementById("speaking-order-list");
+      orderList.innerHTML = "";
+      shuffled.forEach((p, index) => {
+        const item = document.createElement("div");
+        item.className = "order-item";
+        item.innerHTML = `
+          <div class="order-num">${index + 1}</div>
+          <div style="font-weight: 600;">${p.name}</div>
+        `;
+        orderList.appendChild(item);
+      });
+
+      document.getElementById("discussion-category").textContent = "Category: " + selectedCategory;
+
+      // Timer Setup
+      const duration = parseInt(document.getElementById("timer-duration-select").value);
+      const timerWrapper = document.getElementById("timer-wrapper");
+      if (duration === 0) {
+        timerWrapper.style.display = "none";
+      } else {
+        timerWrapper.style.display = "block";
+        timerTotalSeconds = duration;
+        timerRemaining = duration;
+        updateTimerDisplay();
+        startTimerInterval();
+      }
+
+      switchScreen("screen-play");
+    }
+
+    function updateTimerDisplay() {
+      const m = Math.floor(timerRemaining / 60).toString().padStart(2, '0');
+      const s = (timerRemaining % 60).toString().padStart(2, '0');
+      document.getElementById("timer-display").textContent = `${m}:${s}`;
+    }
+
+    function startTimerInterval() {
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (timerRemaining > 0) {
+          timerRemaining--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+        }
+      }, 1000);
+      document.getElementById("timer-btn").textContent = "Pause";
+    }
+
+    function toggleTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        document.getElementById("timer-btn").textContent = "Resume";
+      } else {
+        startTimerInterval();
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerRemaining = timerTotalSeconds;
+      updateTimerDisplay();
+      startTimerInterval();
+    }
+
+    // Results Phase
+    function revealResults() {
+      clearInterval(timerInterval);
+      document.getElementById("result-word").textContent = selectedWord;
+
+      const list = document.getElementById("results-list");
+      list.innerHTML = "";
+
+      roles.forEach(p => {
+        const item = document.createElement("div");
+        item.style.cssText = "padding: 10px; border-radius: 8px; background: var(--panel-bg); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;";
+        const isImp = p.role === "imposter";
+        item.innerHTML = `
+          <span style="font-weight:600;">${p.name}</span>
+          <span style="font-weight:700; color: ${isImp ? 'var(--danger)' : 'var(--success)'}">
+            ${isImp ? '⚠️ Imposter' : 'Civilian'}
+          </span>
+        `;
+        list.appendChild(item);
+      });
+
+      switchScreen("screen-results");
+    }
+
+    function returnToSetup() {
+      switchScreen("screen-setup");
+    }
+
+    // Custom Words Modal Handling
+    function openCustomWordModal() {
+      document.getElementById("custom-modal").classList.add("active");
+    }
+
+    function closeCustomWordModal() {
+      document.getElementById("custom-modal").classList.remove("active");
+    }
+
+    function saveCustomWords() {
+      const cat = document.getElementById("custom-cat-name").value.trim();
+      const rawWords = document.getElementById("custom-cat-words").value.trim();
+      if (!cat || !rawWords) {
+        alert("Please enter both category name and words!");
+        return;
+      }
+
+      const words = rawWords.split(",").map(w => w.trim()).filter(w => w.length > 0);
+      if (words.length < 2) {
+        alert("Please add at least 2 words!");
+        return;
+      }
+
+      wordBank[cat] = words;
+
+      // Save to localStorage
+      try {
+        const savedCustomWords = JSON.parse(localStorage.getItem("imposter_custom_words") || "{}");
+        savedCustomWords[cat] = words;
+        localStorage.setItem("imposter_custom_words", JSON.stringify(savedCustomWords));
+      } catch (e) {}
+
+      updateCategoryDropdown();
+      closeCustomWordModal();
+      document.getElementById("custom-cat-name").value = "";
+      document.getElementById("custom-cat-words").value = "";
+    }
+
+    function updateCategoryDropdown() {
+      const select = document.getElementById("category-select");
+      select.innerHTML = '<option value="all">🎲 All Categories (Random)</option>';
+      Object.keys(wordBank).forEach(cat => {
+        const opt = document.createElement("option");
+        opt.value = cat;
+        opt.textContent = cat;
+        select.appendChild(opt);
+      });
+    }
+
+    // Initialize on launch
+    initStorage();
+  </script>
+</body>
+</html>
