@@ -81,7 +81,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* Player Chips & Input */
     .player-input-row {
       display: flex;
       gap: 6px;
@@ -117,7 +116,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      max-height: 140px;
+      max-height: 130px;
       overflow-y: auto;
       background: var(--panel-bg);
       padding: 10px;
@@ -209,7 +208,6 @@
       background: var(--danger);
     }
 
-    /* Pass & Reveal */
     .player-tag {
       font-size: 1.5rem;
       font-weight: 800;
@@ -248,7 +246,7 @@
     }
 
     .word-display {
-      font-size: 2.2rem;
+      font-size: 2.1rem;
       font-weight: 800;
       word-break: break-word;
     }
@@ -273,7 +271,6 @@
       color: var(--danger);
     }
 
-    /* Order List & Discussion */
     .order-box {
       background: var(--panel-bg);
       padding: 12px;
@@ -316,7 +313,6 @@
       margin: 10px 0;
     }
 
-    /* Modal for custom words */
     .modal {
       display: none;
       position: fixed;
@@ -372,20 +368,24 @@
         </div>
       </div>
 
-      <!-- Category selection -->
+      <!-- Category selection (10 Categories with 200 words) -->
       <div class="form-group">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
           <label style="margin:0;">Word Category</label>
           <a href="#" onclick="openCustomWordModal(); return false;" style="font-size:0.75rem; color:var(--accent); text-decoration:none;">+ Add Custom Words</a>
         </div>
         <select id="category-select">
-          <option value="all">🎲 All Categories (Random)</option>
-          <option value="Nepali Food">🥟 Nepali Food & Khaja</option>
-          <option value="Places in Nepal">🏔️ Places & Travel</option>
-          <option value="Daily Nepali Life">🛵 Daily Life & Transport</option>
-          <option value="Culture & Festivals">🪔 Festivals & Culture</option>
-          <option value="Gadgets & Common Tech">📱 Gadgets & Common Tech</option>
-          <option value="Nepali Animals">🦏 Animals & Wildlife</option>
+          <option value="all">🎲 All Categories (Random 200 Words)</option>
+          <option value="Nepali Food">🥟 Nepali Food & Mitho Khaja</option>
+          <option value="Places in Nepal">🏔️ Places & Landmarks</option>
+          <option value="Daily Nepali Life">🛵 Daily Life & Street Culture</option>
+          <option value="Culture & Festivals">🪔 Festivals & Traditions</option>
+          <option value="Games & Sports">🎮 Games & Sports</option>
+          <option value="Music & Pop Culture">🎬 Music & Pop Culture</option>
+          <option value="Tech & Modern Life">📱 Tech & Modern Life</option>
+          <option value="School & College">🎒 School & College Life</option>
+          <option value="Wildlife & Nature">🌲 Wildlife & Nature</option>
+          <option value="Kitchen & Household">🏠 Kitchen & Household</option>
         </select>
       </div>
 
@@ -406,7 +406,7 @@
 
     <!-- Screen 2: Pass & Reveal -->
     <div id="screen-pass" class="screen">
-      <p style="color: var(--text-muted); font-size: 0.9rem;">Pass the device to:</p>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">Pass device to:</p>
       <div class="player-tag" id="current-player-label">Aayush</div>
 
       <div class="card" id="card-display">
@@ -431,7 +431,7 @@
 
       <div class="category-badge" id="discussion-category">Category: Nepali Food</div>
 
-      <!-- Turn Speaking Order -->
+      <!-- Speaking Order -->
       <div class="order-box">
         <p style="font-size: 0.75rem; color: var(--text-muted); font-weight:700; margin-bottom:8px; text-transform:uppercase;">Speaking Order:</p>
         <div id="speaking-order-list"></div>
@@ -470,11 +470,11 @@
         <h3 style="margin-bottom: 12px;">Add Custom Words</h3>
         <div class="form-group">
           <label>Category Name</label>
-          <input type="text" id="custom-cat-name" placeholder="e.g. Nepali Memes, Bollywood" />
+          <input type="text" id="custom-cat-name" placeholder="e.g. Nepali Memes, Inside Jokes" />
         </div>
         <div class="form-group">
           <label>Words (comma-separated)</label>
-          <input type="text" id="custom-cat-words" placeholder="e.g. Sano Bhai, Rajesh Hamal, Dhurmus" />
+          <input type="text" id="custom-cat-words" placeholder="e.g. Word 1, Word 2, Word 3" />
         </div>
         <button class="btn" onclick="saveCustomWords()">Save Category</button>
         <button class="btn btn-secondary" onclick="closeCustomWordModal()">Cancel</button>
@@ -484,41 +484,74 @@
   </div>
 
   <script>
-    // Initial Base Word Bank
+    // 200 Words Bank: 10 Categories x 20 Words each
     const DEFAULT_WORD_BANK = {
       "Nepali Food": [
         "Momo", "Chowmein", "Chatpate", "Pani Puri", "Sel Roti", 
         "Dal Bhat", "Dhido", "Thukpa", "Sekuwa", "Sukuti", 
-        "Yomari", "Bara", "Gundruk", "Achar", "Chiya", "Lassi"
+        "Yomari", "Bara", "Gundruk", "Kalo Chiya", "Dudh Chiya", 
+        "Lassi", "Laphing", "Samay Baji", "Pustakari", "Thekuwa"
       ],
       "Places in Nepal": [
-        "Pokhara", "Sauraha", "Thamel", "Pashupatinath", "Boudhanath", 
-        "Nagarkot", "Everest", "Rara Lake", "Phewa Lake", "Dharan", 
-        "Mustang", "Lumbini", "Swayambhunath", "Bandipur"
+        "Pokhara", "Sagarmatha (Everest)", "Thamel", "Pashupatinath", "Boudhanath", 
+        "Swayambhunath", "Nagarkot", "Rara Lake", "Phewa Lake", "Mustang", 
+        "Lumbini", "Dharan", "Bandipur", "Chitwan (Sauraha)", "Bhaktapur Durbar Square", 
+        "Patan Durbar Square", "Tilicho Lake", "Janakpur (Janaki Mandir)", "Ilam (Tea Gardens)", "Kalinchowk"
       ],
       "Daily Nepali Life": [
-        "Pathao", "Safa Tempo", "Micro Bus", "Loadshedding", "Chappal", 
+        "Pathao", "InDrive", "Safa Tempo", "Micro Bus", "Loadshedding", 
         "Dhunge Dhara", "Khukuri", "Dhaka Topi", "Doko", "Nanglo", 
-        "Jhola", "Mitho Paan", "Pressure Cooker", "Gatta"
+        "Jhola", "Goldstar Shoes", "Mitho Paan", "Footpath Pasal", "Local Khaja Ghar", 
+        "Zebra Cross", "Chappal", "Galli (Alleyway)", "Jutta Pasal", "Khilli Churot"
       ],
       "Culture & Festivals": [
         "Dashain", "Tihar", "Chhath", "Holi", "Teej", 
-        "Shivaratri", "Deusi Bhailo", "Tika", "Ping", "Dakshina"
+        "Shivaratri", "Deusi Bhailo", "Rato Tika", "Rote Ping (Bamboo Swing)", "Dakshina", 
+        "Bhai Tika", "Rakshya Bandhan", "Gai Jatra", "Indra Jatra", "Maghe Sankranti", 
+        "Jamara", "Rangoli", "Bisket Jatra", "Losar", "Ghatasthapana"
       ],
-      "Gadgets & Common Tech": [
-        "Smartphone", "Laptop", "Earbuds", "Instagram", "TikTok", 
-        "WiFi", "YouTube", "Smartwatch", "Power Bank", "Headphones"
+      "Games & Sports": [
+        "Carrom Board", "Ludo", "Dandi Biyo", "Chungi (Rubber band ball)", "Gatta", 
+        "Football", "Cricket", "Badminton", "PUBG Mobile", "Free Fire", 
+        "Chess", "Bagh Chal", "Marriage (Cards)", "Flush (Teen Patti)", "Callbreak", 
+        "Lukamari (Hide & Seek)", "Skipping", "Volleyball", "Table Tennis", "Snooker / Pool"
       ],
-      "Nepali Animals": [
-        "Danfe", "One-horned Rhino", "Royal Bengal Tiger", "Yak", 
-        "Hatti (Elephant)", "Kukur (Dog)", "Biralo (Cat)", "Bandar (Monkey)"
+      "Music & Pop Culture": [
+        "Madal", "Sarangi", "Bansuri (Flute)", "Tungna", "Dohori Geet", 
+        "Lok Geet", "Rajesh Hamal", "Dayahang Rai", "Bipin Karki", "Paul Shah", 
+        "1974 AD", "Nepathya", "Albatross", "Tribal Rain", "Sajjan Raj Vaidya", 
+        "Kuma Sagar", "Asare Mahinama", "Resham Firiri", "Cartoonz Crew", "Teej Song"
+      ],
+      "Tech & Modern Life": [
+        "Smartphone", "Laptop", "Earbuds", "TikTok", "Instagram", 
+        "YouTube", "Facebook", "WiFi Router", "Smartwatch", "Power Bank", 
+        "Internet Memes", "QR Code (eSewa / Khalti)", "Selfie Stick", "Bluetooth Speaker", "Charger", 
+        "Anime", "Daraz (Online Delivery)", "Reels", "Netflix", "Gaming PC"
+      ],
+      "School & College": [
+        "Homework", "Tiffin Box", "School Canteen", "Unit Test", "SEE Exam", 
+        "TU Board Exam", "Bunking Class", "Attendance Register", "Back-bencher", "Teacher's Pet", 
+        "ID Card", "School Uniform", "Tie & Belt", "Practical Exam", "Morning Assembly", 
+        "Report Card", "Sports Day", "Educational Tour (Picnic)", "White Board", "Rough Copy"
+      ],
+      "Wildlife & Nature": [
+        "Danfe (Lophophorus)", "One-horned Rhino (Gaida)", "Royal Bengal Tiger (Bagh)", "Snow Leopard (Hiun Chituwa)", "Red Panda (Habre)", 
+        "Himalayan Yak", "Elephant (Hatti)", "Monkey (Bandar)", "Himalayan Thar", "Gharial Crocodile", 
+        "Lali Gurans (Rhododendron)", "Simal Tree", "Bamboo (Bans)", "Musk Deer (Kasturi)", "Wild Boar (Bandel)", 
+        "Porcupine (Dumsi)", "Owl (Latokoshero)", "Crow (Kaag)", "Eagle (Chil)", "Cow (Gai)"
+      ],
+      "Kitchen & Household": [
+        "Pressure Cooker", "Karahi (Wok)", "Belna Roti (Rolling pin)", "Silauto (Grinding Stone)", "Chimta (Tongs)", 
+        "Whisk (Dal Katerna)", "Thermos Jug", "Masala Box", "Chulesi (Cutting blade)", "Matka (Clay pot)", 
+        "Gagri (Brass water pot)", "Baltin (Bucket)", "Kucho (Broom)", "Pida (Low wooden stool)", "Gundri (Straw Mat)", 
+        "Sirak (Quilt)", "Dasna (Mattress)", "Machhardani (Mosquito Net)", "Taalo (Lock & Key)", "Matchbox (Salai)"
       ]
     };
 
     let wordBank = { ...DEFAULT_WORD_BANK };
     let playerNames = ["Aayush", "Bipul", "Sita", "Rohan"];
     let imposterCount = 1;
-    let roles = []; // holds objects { name: "...", role: "civilian"|"imposter" }
+    let roles = [];
     let currentPlayerIndex = 0;
     let selectedCategory = "";
     let selectedWord = "";
@@ -527,7 +560,6 @@
     let timerRemaining = 180;
     let timerInterval = null;
 
-    // Load from LocalStorage
     function initStorage() {
       try {
         const savedPlayers = localStorage.getItem("imposter_players");
@@ -552,7 +584,6 @@
       } catch (e) {}
     }
 
-    // Players Management
     function renderPlayerList() {
       const container = document.getElementById("players-container");
       container.innerHTML = "";
@@ -583,7 +614,6 @@
       renderPlayerList();
     }
 
-    // Allow Enter key to quickly add player
     document.getElementById("new-player-name").addEventListener("keypress", (e) => {
       if (e.key === "Enter") addPlayer();
     });
@@ -612,20 +642,17 @@
       }
     }
 
-    // Screen Transitions
     function switchScreen(screenId) {
       document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
       document.getElementById(screenId).classList.add("active");
     }
 
-    // Game Start
     function startGame() {
       if (playerNames.length < 3) {
         alert("Add at least 3 players to start!");
         return;
       }
 
-      // Pick Category & Word
       const catSelect = document.getElementById("category-select").value;
       const categories = catSelect === "all" ? Object.keys(wordBank) : [catSelect];
       selectedCategory = categories[Math.floor(Math.random() * categories.length)];
@@ -633,7 +660,6 @@
       const words = wordBank[selectedCategory];
       selectedWord = words[Math.floor(Math.random() * words.length)];
 
-      // Assign Roles
       roles = playerNames.map(name => ({ name, role: "civilian" }));
       let assigned = 0;
       while (assigned < imposterCount) {
@@ -649,7 +675,6 @@
       switchScreen("screen-pass");
     }
 
-    // Pass and Reveal Phase
     function preparePassScreen() {
       isCardRevealed = false;
       const player = roles[currentPlayerIndex];
@@ -712,9 +737,7 @@
       }
     }
 
-    // Discussion Phase
     function startDiscussion() {
-      // Create random order for clues
       const shuffled = [...roles].sort(() => 0.5 - Math.random());
       const orderList = document.getElementById("speaking-order-list");
       orderList.innerHTML = "";
@@ -730,7 +753,6 @@
 
       document.getElementById("discussion-category").textContent = "Category: " + selectedCategory;
 
-      // Timer Setup
       const duration = parseInt(document.getElementById("timer-duration-select").value);
       const timerWrapper = document.getElementById("timer-wrapper");
       if (duration === 0) {
@@ -782,7 +804,6 @@
       startTimerInterval();
     }
 
-    // Results Phase
     function revealResults() {
       clearInterval(timerInterval);
       document.getElementById("result-word").textContent = selectedWord;
@@ -810,7 +831,6 @@
       switchScreen("screen-setup");
     }
 
-    // Custom Words Modal Handling
     function openCustomWordModal() {
       document.getElementById("custom-modal").classList.add("active");
     }
@@ -835,7 +855,6 @@
 
       wordBank[cat] = words;
 
-      // Save to localStorage
       try {
         const savedCustomWords = JSON.parse(localStorage.getItem("imposter_custom_words") || "{}");
         savedCustomWords[cat] = words;
@@ -850,7 +869,7 @@
 
     function updateCategoryDropdown() {
       const select = document.getElementById("category-select");
-      select.innerHTML = '<option value="all">🎲 All Categories (Random)</option>';
+      select.innerHTML = '<option value="all">🎲 All Categories (Random 200 Words)</option>';
       Object.keys(wordBank).forEach(cat => {
         const opt = document.createElement("option");
         opt.value = cat;
@@ -859,7 +878,6 @@
       });
     }
 
-    // Initialize on launch
     initStorage();
   </script>
 </body>
