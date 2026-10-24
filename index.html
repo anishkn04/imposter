@@ -3,32 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Nepali Imposter Game</title>
+  <title>Nepali Imposter — Material M3</title>
+
+  <!-- Google Material Symbols & Roboto Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
   <style>
+    /* Material Design 3 Tokens */
     :root {
-      --bg: #0b0f19;
-      --card-bg: #151f32;
-      --panel-bg: #1e293b;
-      --accent: #6366f1;
-      --accent-hover: #4f46e5;
-      --danger: #ef4444;
-      --success: #22c55e;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --border: rgba(255, 255, 255, 0.08);
+      --md-sys-color-background: #141218;
+      --md-sys-color-surface: #141218;
+      --md-sys-color-surface-container-lowest: #0f0d13;
+      --md-sys-color-surface-container-low: #1d1b20;
+      --md-sys-color-surface-container: #211f26;
+      --md-sys-color-surface-container-high: #2b2930;
+      --md-sys-color-surface-container-highest: #36343b;
+      
+      --md-sys-color-primary: #d0bcff;
+      --md-sys-color-on-primary: #381e72;
+      --md-sys-color-primary-container: #4f378b;
+      --md-sys-color-on-primary-container: #eaddff;
+      
+      --md-sys-color-secondary: #ccc2dc;
+      --md-sys-color-secondary-container: #4a4458;
+      --md-sys-color-on-secondary-container: #e8def8;
+
+      --md-sys-color-tertiary: #efb8c8;
+      --md-sys-color-tertiary-container: #702f43;
+      --md-sys-color-on-tertiary-container: #ffd8e4;
+
+      --md-sys-color-error: #f2b8b5;
+      --md-sys-color-on-error: #601410;
+      --md-sys-color-error-container: #8c1d18;
+      --md-sys-color-on-error-container: #f9dedc;
+
+      --md-sys-color-success: #b4dfb6;
+      --md-sys-color-success-container: #2f5035;
+
+      --md-sys-color-outline: #938f99;
+      --md-sys-color-outline-variant: #49454f;
+      --md-sys-color-on-surface: #e6e0e9;
+      --md-sys-color-on-surface-variant: #cac4d0;
+
+      --md-elevation-1: 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+      --md-elevation-2: 0 2px 6px 2px rgba(0, 0, 0, 0.2);
+      --md-elevation-3: 0 4px 8px 3px rgba(0, 0, 0, 0.3);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--text);
+      background-color: var(--md-sys-color-background);
+      color: var(--md-sys-color-on-surface);
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -36,26 +73,58 @@
       padding: 12px;
     }
 
-    .container {
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    .m3-app-shell {
       width: 100%;
-      max-width: 450px;
-      background: var(--card-bg);
-      border-radius: 24px;
+      max-width: 440px;
+      background: var(--md-sys-color-surface-container);
+      border-radius: 28px;
       padding: 20px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-      border: 1px solid var(--border);
-      text-align: center;
+      box-shadow: var(--md-elevation-3);
+      position: relative;
+      overflow: hidden;
     }
 
-    h1 {
-      font-size: 1.7rem;
-      letter-spacing: -0.5px;
-    }
-
-    p.subtitle {
-      color: var(--text-muted);
-      font-size: 0.85rem;
+    /* Top Bar */
+    .m3-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    }
+
+    .m3-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: -0.2px;
+    }
+
+    .m3-score-pill {
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: var(--md-sys-color-surface-container-highest);
+      color: var(--md-sys-color-on-surface-variant);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      color: var(--md-sys-color-on-surface-variant);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .screen {
@@ -64,427 +133,800 @@
 
     .screen.active {
       display: block;
+      animation: m3Fade 0.25s cubic-bezier(0, 0, 0.2, 1);
     }
 
-    .form-group {
-      text-align: left;
+    @keyframes m3Fade {
+      from { opacity: 0; transform: scale(0.98) translateY(6px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Form Fields */
+    .m3-field-group {
       margin-bottom: 16px;
+      text-align: left;
     }
 
-    label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text-muted);
+    .m3-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--md-sys-color-primary);
       margin-bottom: 6px;
-      text-transform: uppercase;
+      display: block;
       letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
 
-    .player-input-row {
+    .m3-input-row {
       display: flex;
-      gap: 6px;
-      margin-bottom: 10px;
+      gap: 8px;
     }
 
-    input[type="text"] {
+    .m3-input {
       flex: 1;
-      background: var(--panel-bg);
-      border: 1px solid var(--border);
-      color: white;
-      padding: 10px 14px;
-      border-radius: 12px;
+      background: var(--md-sys-color-surface-container-high);
+      border: 1px solid var(--md-sys-color-outline);
+      border-radius: 8px;
+      color: var(--md-sys-color-on-surface);
+      padding: 12px 14px;
       font-size: 0.95rem;
       outline: none;
     }
 
-    input[type="text"]:focus {
-      border-color: var(--accent);
+    .m3-input:focus {
+      border: 2px solid var(--md-sys-color-primary);
     }
 
-    .btn-add {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 0 16px;
-      border-radius: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .player-list {
+    /* Chips */
+    .m3-chips-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      max-height: 130px;
+      gap: 6px;
+      max-height: 120px;
       overflow-y: auto;
-      background: var(--panel-bg);
+      background: var(--md-sys-color-surface-container-lowest);
       padding: 10px;
       border-radius: 12px;
-      border: 1px solid var(--border);
+      margin-top: 8px;
+      border: 1px solid var(--md-sys-color-outline-variant);
     }
 
-    .player-chip {
-      background: #0f172a;
-      padding: 6px 12px;
-      border-radius: 20px;
+    .m3-chip {
+      background: var(--md-sys-color-surface-container-high);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      color: var(--md-sys-color-on-surface);
+      padding: 6px 10px;
+      border-radius: 8px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       font-size: 0.85rem;
-      font-weight: 600;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-weight: 500;
     }
 
-    .player-chip .remove-btn {
-      color: var(--danger);
+    .m3-chip-delete {
+      color: var(--md-sys-color-error);
       cursor: pointer;
-      font-size: 1rem;
-      line-height: 1;
+      display: flex;
+      align-items: center;
     }
 
-    .counter-control {
+    /* Buttons */
+    .m3-btn {
+      width: 100%;
+      height: 48px;
+      border-radius: 9999px;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .m3-btn-primary {
+      background: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+    }
+
+    .m3-btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .m3-btn-tonal {
+      background: var(--md-sys-color-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
+    }
+
+    .m3-btn-error {
+      background: var(--md-sys-color-error-container);
+      color: var(--md-sys-color-on-error-container);
+    }
+
+    .m3-btn-outlined {
+      background: transparent;
+      border: 1px solid var(--md-sys-color-outline);
+      color: var(--md-sys-color-primary);
+    }
+
+    .m3-counter {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--panel-bg);
+      background: var(--md-sys-color-surface-container-high);
       border-radius: 12px;
       padding: 4px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--md-sys-color-outline-variant);
     }
 
-    .counter-btn {
+    .m3-counter-btn {
       width: 40px;
       height: 40px;
-      background: var(--card-bg);
-      color: white;
+      border-radius: 8px;
       border: none;
-      border-radius: 10px;
-      font-size: 1.3rem;
-      font-weight: bold;
+      background: var(--md-sys-color-surface-container-highest);
+      color: var(--md-sys-color-on-surface);
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .counter-value {
-      font-size: 1.2rem;
-      font-weight: 700;
+    /* Transit Screen */
+    .transit-radar-box {
+      background: var(--md-sys-color-surface-container-lowest);
+      border-radius: 24px;
+      padding: 32px 20px;
+      margin: 16px 0;
+      border: 1px solid var(--md-sys-color-outline-variant);
+      position: relative;
+      overflow: hidden;
     }
 
-    select {
-      width: 100%;
-      background: var(--panel-bg);
-      color: white;
-      border: 1px solid var(--border);
-      padding: 12px 14px;
-      border-radius: 12px;
-      font-size: 0.95rem;
-      outline: none;
+    .radar-pulse-ring {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px auto;
+      animation: pulseRadar 2s infinite;
     }
 
-    .btn {
-      width: 100%;
-      padding: 14px;
-      border-radius: 14px;
-      border: none;
-      font-size: 1.05rem;
-      font-weight: 700;
-      cursor: pointer;
-      background: var(--accent);
-      color: white;
-      margin-top: 10px;
+    @keyframes pulseRadar {
+      0% { box-shadow: 0 0 0 0 rgba(208, 188, 255, 0.4); }
+      70% { box-shadow: 0 0 0 20px rgba(208, 188, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(208, 188, 255, 0); }
     }
 
-    .btn:active {
-      transform: scale(0.98);
-      background: var(--accent-hover);
-    }
-
-    .btn-secondary {
-      background: #334155;
-      margin-top: 8px;
-    }
-
-    .btn-danger {
-      background: var(--danger);
-    }
-
-    .player-tag {
-      font-size: 1.5rem;
+    .handover-target-name {
+      font-size: 2.2rem;
       font-weight: 800;
-      color: var(--accent);
-      margin-bottom: 6px;
+      color: var(--md-sys-color-primary);
+      margin: 6px 0;
+      letter-spacing: -0.5px;
     }
 
-    .card {
-      min-height: 200px;
-      background: var(--panel-bg);
-      border-radius: 16px;
-      padding: 20px;
-      margin: 18px 0;
+    /* Slide to Claim Widget */
+    .m3-slider-track {
+      width: 100%;
+      height: 58px;
+      background: var(--md-sys-color-surface-container-highest);
+      border-radius: 9999px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--md-sys-color-outline-variant);
+      touch-action: none;
+      margin-top: 14px;
+    }
+
+    .slider-text {
+      width: 100%;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--md-sys-color-on-surface-variant);
+      pointer-events: none;
+      padding-left: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .slider-thumb {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+      position: absolute;
+      left: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      box-shadow: var(--md-elevation-2);
+      transition: transform 0.05s ease-out;
+    }
+
+    /* Biometric Decryption Deck */
+    .m3-decrypt-deck {
+      min-height: 270px;
+      background: var(--md-sys-color-surface-container-high);
+      border-radius: 24px;
+      padding: 24px 20px;
+      margin: 16px 0;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      border: 2px dashed rgba(255, 255, 255, 0.15);
+      justify-content: center;
+      border: 2px dashed var(--md-sys-color-outline-variant);
+      position: relative;
+      touch-action: none;
+      transition: border 0.2s, background 0.2s;
     }
 
-    .card.revealed.civilian {
-      border: 2px solid var(--success);
+    .m3-decrypt-deck.unlocked {
+      border: 2px solid var(--md-sys-color-primary);
+      background: var(--md-sys-color-surface-container-highest);
     }
 
-    .card.revealed.imposter {
-      border: 2px solid var(--danger);
+    .m3-decrypt-deck.imposter-unlocked {
+      border-color: var(--md-sys-color-error);
+    }
+
+    .scanner-svg-wrapper {
+      width: 90px;
+      height: 90px;
+      position: relative;
+      margin-bottom: 12px;
+      pointer-events: none;
+    }
+
+    .scanner-svg {
+      width: 90px;
+      height: 90px;
+      transform: rotate(-90deg);
+    }
+
+    .scanner-bg-circle {
+      fill: none;
+      stroke: var(--md-sys-color-surface-container-highest);
+      stroke-width: 6;
+    }
+
+    .scanner-progress-circle {
+      fill: none;
+      stroke: var(--md-sys-color-primary);
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-dasharray: 251.2;
+      stroke-dashoffset: 251.2;
+      transition: stroke-dashoffset 0.05s linear;
+    }
+
+    .scanner-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--md-sys-color-primary);
+    }
+
+    .secret-payload {
+      display: none;
+      width: 100%;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    /* High Visibility Imposter Banner & Category */
+    .imposter-alert-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--md-sys-color-error-container);
+      color: var(--md-sys-color-on-error-container);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .imposter-category-card {
+      background: var(--md-sys-color-surface-container-lowest);
+      border: 2px solid var(--md-sys-color-error);
+      border-radius: 16px;
+      padding: 16px 14px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .imposter-category-sub {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--md-sys-color-error);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .imposter-category-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--md-sys-color-on-surface);
+      line-height: 1.2;
     }
 
     .category-badge {
       font-size: 0.8rem;
-      padding: 4px 12px;
-      border-radius: 50px;
-      background: rgba(255, 255, 255, 0.1);
-      margin-bottom: 12px;
+      font-weight: 600;
+      background: var(--md-sys-color-surface-container-lowest);
+      color: var(--md-sys-color-secondary);
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 10px;
       display: inline-block;
     }
 
-    .word-display {
+    .word-text {
       font-size: 2.1rem;
       font-weight: 800;
-      word-break: break-word;
+      color: var(--md-sys-color-on-surface);
+      line-height: 1.2;
     }
 
-    .role-badge {
-      font-size: 0.8rem;
+    .role-indicator {
+      display: inline-block;
+      font-size: 0.75rem;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 1px;
       padding: 4px 12px;
       border-radius: 6px;
-      margin-top: 10px;
+      margin-top: 12px;
+      letter-spacing: 0.5px;
     }
 
-    .role-badge.civilian {
-      background: rgba(34, 197, 94, 0.2);
-      color: var(--success);
+    .role-indicator.civilian {
+      background: var(--md-sys-color-success-container);
+      color: var(--md-sys-color-success);
     }
 
-    .role-badge.imposter {
-      background: rgba(239, 68, 68, 0.2);
-      color: var(--danger);
-    }
-
-    .order-box {
-      background: var(--panel-bg);
-      padding: 12px;
-      border-radius: 12px;
+    /* Discussion, Modifiers, Voting */
+    .modifier-card {
+      background: var(--md-sys-color-tertiary-container);
+      color: var(--md-sys-color-on-tertiary-container);
+      padding: 12px 14px;
+      border-radius: 16px;
+      margin: 12px 0;
       text-align: left;
-      margin: 14px 0;
-      border: 1px solid var(--border);
-    }
-
-    .order-item {
+      font-size: 0.85rem;
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 6px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      font-size: 0.9rem;
     }
 
-    .order-item:last-child {
+    .order-list {
+      background: var(--md-sys-color-surface-container-high);
+      border-radius: 16px;
+      padding: 8px 12px;
+      margin-bottom: 16px;
+      text-align: left;
+      max-height: 140px;
+      overflow-y: auto;
+    }
+
+    .order-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    }
+
+    .order-row:last-child {
       border-bottom: none;
     }
 
-    .order-num {
-      width: 22px;
-      height: 22px;
-      background: #0f172a;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: bold;
-      color: var(--accent);
-    }
-
-    .timer {
+    .timer-text {
       font-size: 2.5rem;
-      font-weight: 800;
+      font-weight: 700;
       font-variant-numeric: tabular-nums;
-      margin: 10px 0;
+      margin: 8px 0;
     }
 
-    .modal {
+    .vote-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .vote-item {
+      background: var(--md-sys-color-surface-container-high);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: 12px;
+      padding: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .vote-item:hover, .vote-item:active {
+      border-color: var(--md-sys-color-primary);
+      background: var(--md-sys-color-surface-container-highest);
+    }
+
+    /* Modal */
+    .m3-modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 16px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
       z-index: 100;
       align-items: center;
       justify-content: center;
+      padding: 16px;
     }
 
-    .modal.active {
+    .m3-modal.active {
       display: flex;
     }
 
-    .modal-content {
-      background: var(--card-bg);
+    .m3-dialog {
+      background: var(--md-sys-color-surface-container-high);
       width: 100%;
-      max-width: 400px;
-      border-radius: 16px;
-      padding: 20px;
+      max-width: 380px;
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: var(--md-elevation-3);
       text-align: left;
-      border: 1px solid var(--border);
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <div class="m3-app-shell">
     
-    <!-- Screen 1: Setup -->
-    <div id="screen-setup" class="screen active">
-      <h1>Nepali Imposter</h1>
-      <p class="subtitle">Offline Party Word Game</p>
+    <!-- Top Bar -->
+    <header class="m3-top-bar">
+      <div>
+        <div class="m3-title">Imposter</div>
+        <div style="font-size:0.75rem; color: var(--md-sys-color-on-surface-variant);">Vault Protocol M3</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span class="m3-score-pill" id="score-counter">Civ 0 : 0 Imp</span>
+        <button class="icon-btn" onclick="toggleMute()" id="mute-btn" title="Toggle Sound">
+          <span class="material-symbols-outlined" id="mute-icon">volume_up</span>
+        </button>
+      </div>
+    </header>
 
-      <!-- Players Management -->
-      <div class="form-group">
-        <label>Player Names (<span id="player-count-num">4</span> players)</label>
-        <div class="player-input-row">
-          <input type="text" id="new-player-name" placeholder="Enter name (e.g. Aayush)..." maxlength="15" />
-          <button class="btn-add" onclick="addPlayer()">+ Add</button>
+    <!-- SCREEN 1: SETUP -->
+    <section id="screen-setup" class="screen active">
+      <div class="m3-field-group">
+        <label class="m3-label">Players (<span id="player-count">4</span>)</label>
+        <div class="m3-input-row">
+          <input type="text" id="new-player-name" class="m3-input" placeholder="Player name (e.g. Aayush)" maxlength="14" />
+          <button class="m3-btn m3-btn-primary" style="width: auto; padding: 0 18px; border-radius: 8px;" onclick="addPlayer()">
+            <span class="material-symbols-outlined">add</span> Add
+          </button>
         </div>
-        <div class="player-list" id="players-container"></div>
+        <div class="m3-chips-container" id="players-chip-box"></div>
       </div>
 
-      <!-- Imposters Count -->
-      <div class="form-group">
-        <label>Imposters</label>
-        <div class="counter-control">
-          <button class="counter-btn" onclick="adjustImposters(-1)">-</button>
-          <span class="counter-value" id="val-imposters">1</span>
-          <button class="counter-btn" onclick="adjustImposters(1)">+</button>
+      <div class="m3-field-group">
+        <label class="m3-label">Imposters</label>
+        <div class="m3-counter">
+          <button class="m3-counter-btn" onclick="adjustImposters(-1)">
+            <span class="material-symbols-outlined">remove</span>
+          </button>
+          <span class="m3-counter-value" id="imposter-count-val">1</span>
+          <button class="m3-counter-btn" onclick="adjustImposters(1)">
+            <span class="material-symbols-outlined">add</span>
+          </button>
         </div>
       </div>
 
-      <!-- Category selection (10 Categories with 200 words) -->
-      <div class="form-group">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-          <label style="margin:0;">Word Category</label>
-          <a href="#" onclick="openCustomWordModal(); return false;" style="font-size:0.75rem; color:var(--accent); text-decoration:none;">+ Add Custom Words</a>
+      <div class="m3-field-group">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+          <label class="m3-label" style="margin:0;">Word Category</label>
+          <a href="#" onclick="openCustomWordModal(); return false;" style="font-size:0.75rem; color:var(--md-sys-color-primary); text-decoration:none;">+ Custom</a>
         </div>
-        <select id="category-select">
-          <option value="all">🎲 All Categories (Random 200 Words)</option>
-          <option value="Nepali Food">🥟 Nepali Food & Mitho Khaja</option>
-          <option value="Places in Nepal">🏔️ Places & Landmarks</option>
-          <option value="Daily Nepali Life">🛵 Daily Life & Street Culture</option>
-          <option value="Culture & Festivals">🪔 Festivals & Traditions</option>
-          <option value="Games & Sports">🎮 Games & Sports</option>
-          <option value="Music & Pop Culture">🎬 Music & Pop Culture</option>
-          <option value="Tech & Modern Life">📱 Tech & Modern Life</option>
-          <option value="School & College">🎒 School & College Life</option>
-          <option value="Wildlife & Nature">🌲 Wildlife & Nature</option>
-          <option value="Kitchen & Household">🏠 Kitchen & Household</option>
+        <select id="category-select" class="m3-input">
+          <option value="all">All Categories (200 Words)</option>
+          <option value="Nepali Food">Nepali Food & Mitho Khaja</option>
+          <option value="Places in Nepal">Places & Landmarks</option>
+          <option value="Daily Nepali Life">Daily Life & Street Culture</option>
+          <option value="Culture & Festivals">Festivals & Traditions</option>
+          <option value="Games & Sports">Games & Sports</option>
+          <option value="Music & Pop Culture">Music & Pop Culture</option>
+          <option value="Tech & Modern Life">Tech & Modern Life</option>
+          <option value="School & College">School & College Life</option>
+          <option value="Wildlife & Nature">Wildlife & Nature</option>
+          <option value="Kitchen & Household">Kitchen & Household</option>
         </select>
       </div>
 
-      <!-- Timer Selector -->
-      <div class="form-group">
-        <label>Discussion Timer</label>
-        <select id="timer-duration-select">
-          <option value="180">3 Minutes</option>
-          <option value="120">2 Minutes</option>
-          <option value="60">1 Minute</option>
-          <option value="300">5 Minutes</option>
-          <option value="0">No Timer (Manual)</option>
-        </select>
-      </div>
-
-      <button class="btn" onclick="startGame()">Start Game</button>
-    </div>
-
-    <!-- Screen 2: Pass & Reveal -->
-    <div id="screen-pass" class="screen">
-      <p style="color: var(--text-muted); font-size: 0.9rem;">Pass device to:</p>
-      <div class="player-tag" id="current-player-label">Aayush</div>
-
-      <div class="card" id="card-display">
-        <div id="card-hidden-msg">
-          <p style="font-size: 1.1rem; font-weight: 600;">🔒 Tap below to see your card</p>
-        </div>
-        <div id="card-content" style="display: none;">
-          <span class="category-badge" id="card-category">Food</span>
-          <div class="word-display" id="card-word">Momo</div>
-          <div class="role-badge" id="card-role">Civilian</div>
+      <div class="m3-field-group">
+        <label class="m3-label">Settings</label>
+        <div style="display:flex; gap:8px;">
+          <select id="timer-duration-select" class="m3-input" style="flex:1;">
+            <option value="180">3 Min Timer</option>
+            <option value="120">2 Min Timer</option>
+            <option value="60">1 Min Timer</option>
+            <option value="0">No Timer</option>
+          </select>
+          <button id="toggle-spice-btn" class="m3-btn m3-btn-tonal" style="flex:1; border-radius: 8px; font-size:0.8rem;" onclick="toggleSpiceMode()">
+            <span class="material-symbols-outlined" style="font-size:18px;">local_fire_department</span>
+            <span id="spice-label">Spice: OFF</span>
+          </button>
         </div>
       </div>
 
-      <button class="btn" id="reveal-toggle-btn" onclick="toggleReveal()">Tap to Reveal</button>
-      <button class="btn btn-secondary" id="next-player-btn" style="display:none;" onclick="nextPlayer()">Next Player ➔</button>
-    </div>
+      <button class="m3-btn m3-btn-primary" onclick="startGame()">
+        <span class="material-symbols-outlined">play_arrow</span> Start Game
+      </button>
+    </section>
 
-    <!-- Screen 3: Discussion & Clue Round -->
-    <div id="screen-play" class="screen">
-      <h1>Clue Round!</h1>
-      <p class="subtitle">Each player gives 1 clue. Catch the Imposter!</p>
-
-      <div class="category-badge" id="discussion-category">Category: Nepali Food</div>
-
-      <!-- Speaking Order -->
-      <div class="order-box">
-        <p style="font-size: 0.75rem; color: var(--text-muted); font-weight:700; margin-bottom:8px; text-transform:uppercase;">Speaking Order:</p>
-        <div id="speaking-order-list"></div>
+    <!-- SCREEN 2: TRANSIT SCREEN (PHYSICAL HANDOVER) -->
+    <section id="screen-transit" class="screen">
+      <div style="font-size:0.8rem; color:var(--md-sys-color-primary); font-weight:600; text-transform:uppercase;" id="transit-progress">
+        Player 1 of 4
       </div>
 
-      <!-- Timer -->
-      <div id="timer-wrapper">
-        <div class="timer" id="timer-display">03:00</div>
-        <div style="display: flex; gap: 8px;">
-          <button class="btn" style="flex:1;" id="timer-btn" onclick="toggleTimer()">Pause</button>
-          <button class="btn btn-secondary" style="flex:1;" onclick="resetTimer()">Reset</button>
+      <div class="transit-radar-box">
+        <div class="radar-pulse-ring">
+          <span class="material-symbols-outlined" style="font-size: 38px;">smartphone</span>
+        </div>
+        <p style="font-size:0.75rem; color:var(--md-sys-color-on-surface-variant); font-weight:700; letter-spacing:0.8px;">PHYSICAL HANDOVER REQUIRED</p>
+        <p style="font-size:0.95rem; font-weight:500; margin-top:4px;">Hand device over to:</p>
+        <div class="handover-target-name" id="transit-target-name">Aayush</div>
+        <p style="font-size:0.75rem; color:var(--md-sys-color-outline); margin-top:6px;">
+          Screen is locked until claimed by recipient
+        </p>
+      </div>
+
+      <!-- Slide to Claim Component -->
+      <div class="m3-slider-track" id="slider-track">
+        <div class="slider-text" id="slider-text">Slide to claim device</div>
+        <div class="slider-thumb" id="slider-thumb">
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: BIOMETRIC DECRYPT SCREEN (HOLD TO REVEAL) -->
+    <section id="screen-decrypt" class="screen">
+      <div style="font-size:0.8rem; color:var(--md-sys-color-primary); font-weight:600;" id="decrypt-progress">
+        Aayush's Vault
+      </div>
+      <h2 style="font-size: 1.35rem; margin: 4px 0 10px 0;" id="decrypt-title">Identity Decryption</h2>
+
+      <div class="m3-decrypt-deck" id="decrypt-deck">
+        <div id="scanner-view">
+          <div class="scanner-svg-wrapper">
+            <svg class="scanner-svg" viewBox="0 0 90 90">
+              <circle class="scanner-bg-circle" cx="45" cy="45" r="40"></circle>
+              <circle class="scanner-progress-circle" id="scanner-progress" cx="45" cy="45" r="40"></circle>
+            </svg>
+            <div class="scanner-icon">
+              <span class="material-symbols-outlined" style="font-size: 44px;">fingerprint</span>
+            </div>
+          </div>
+          <div style="font-size:1.05rem; font-weight:600;">Hold to Decrypt Secret</div>
+          <div style="font-size:0.8rem; color:var(--md-sys-color-on-surface-variant); margin-top:4px;">
+            Release immediately locks card again
+          </div>
+        </div>
+
+        <div class="secret-payload" id="secret-payload">
+          <!-- Civilian View -->
+          <div id="civilian-payload-view" style="display:none;">
+            <span class="category-badge" id="payload-cat">Category: Food</span>
+            <div class="word-text" id="payload-word">Momo</div>
+            <div class="role-indicator civilian">Civilian</div>
+          </div>
+
+          <!-- Imposter High-Visibility View -->
+          <div id="imposter-payload-view" style="display:none;">
+            <div class="imposter-alert-banner">
+              <span class="material-symbols-outlined" style="font-size: 18px;">warning</span>
+              <span>YOU ARE THE IMPOSTER</span>
+            </div>
+
+            <div class="imposter-category-card">
+              <div class="imposter-category-sub">Your Hint (Category)</div>
+              <div class="imposter-category-title" id="imposter-cat-title">Nepali Food</div>
+            </div>
+
+            <p style="font-size: 0.8rem; color: var(--md-sys-color-on-surface-variant); line-height: 1.35;">
+              Blend in. Civilians know the specific word in this category. You only know the category.
+            </p>
+          </div>
         </div>
       </div>
 
-      <button class="btn btn-danger" style="margin-top: 16px;" onclick="revealResults()">End Round & Reveal Imposters</button>
-    </div>
+      <!-- Turn Burn Button -->
+      <button class="m3-btn m3-btn-primary" id="btn-burn-turn" onclick="burnTurnAndLock()" style="display:none;">
+        <span class="material-symbols-outlined">lock</span> Burn & Lock Identity
+      </button>
 
-    <!-- Screen 4: Results -->
-    <div id="screen-results" class="screen">
-      <h1>Game Over!</h1>
-      <p class="subtitle">All secrets revealed</p>
+      <div id="decrypt-hint" style="font-size:0.8rem; color:var(--md-sys-color-on-surface-variant); margin-top:8px;">
+        Press and hold firmly to view
+      </div>
+    </section>
 
-      <div style="background: var(--panel-bg); padding: 14px; border-radius: 12px; margin-bottom: 16px; border: 1px solid var(--border);">
-        <p style="color: var(--text-muted); font-size: 0.8rem;">THE SECRET WORD WAS</p>
-        <h2 style="color: var(--success); font-size: 2rem; margin-top:4px;" id="result-word">Momo</h2>
+    <!-- SCREEN 4: DISCUSSION & CLUE ROUND -->
+    <section id="screen-play" class="screen">
+      <span class="category-badge" id="discussion-cat-badge">Category: Nepali Food</span>
+      <h2 style="font-size: 1.3rem; margin: 4px 0;">Clue Round</h2>
+
+      <div class="modifier-card" id="modifier-box" style="display:none;">
+        <span class="material-symbols-outlined" style="font-size: 24px;">local_fire_department</span>
+        <div>
+          <div style="font-weight:700; font-size:0.75rem; text-transform:uppercase;">Chaos Rule</div>
+          <div id="modifier-text" style="font-size:0.85rem;">Give clue in 1 word only.</div>
+        </div>
       </div>
 
-      <div id="results-list" style="margin-bottom: 16px;"></div>
+      <div class="order-list">
+        <div style="font-size:0.75rem; color:var(--md-sys-color-outline); font-weight:700; margin-bottom:4px; text-transform:uppercase;">Speaking Order:</div>
+        <div id="order-container"></div>
+      </div>
 
-      <button class="btn" onclick="returnToSetup()">Play Again</button>
-    </div>
+      <div id="timer-box">
+        <div class="timer-text" id="timer-display">03:00</div>
+        <div style="display:flex; gap:8px;">
+          <button class="m3-btn m3-btn-tonal" style="flex:1;" id="btn-timer-toggle" onclick="toggleTimer()">
+            <span class="material-symbols-outlined" id="timer-toggle-icon">pause</span> Pause
+          </button>
+          <button class="m3-btn m3-btn-outlined" style="flex:1;" onclick="resetTimer()">
+            <span class="material-symbols-outlined">restart_alt</span> Reset
+          </button>
+        </div>
+      </div>
 
-    <!-- Modal: Custom Words Adder -->
-    <div class="modal" id="custom-modal">
-      <div class="modal-content">
-        <h3 style="margin-bottom: 12px;">Add Custom Words</h3>
-        <div class="form-group">
-          <label>Category Name</label>
-          <input type="text" id="custom-cat-name" placeholder="e.g. Nepali Memes, Inside Jokes" />
+      <button class="m3-btn m3-btn-error" style="margin-top: 16px;" onclick="goToVoting()">
+        <span class="material-symbols-outlined">how_to_vote</span> Vote & Eliminate
+      </button>
+    </section>
+
+    <!-- SCREEN 5: VOTING -->
+    <section id="screen-voting" class="screen">
+      <h2 style="font-size: 1.3rem;">Who is the Imposter?</h2>
+      <p style="font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant); margin-top: 4px;">
+        Tap the player chosen by group vote:
+      </p>
+
+      <div class="vote-grid" id="vote-grid"></div>
+
+      <button class="m3-btn m3-btn-outlined" onclick="switchScreen('screen-play')">Back to Discussion</button>
+    </section>
+
+    <!-- SCREEN 6: IMPOSTER'S FINAL GUESS -->
+    <section id="screen-guess" class="screen">
+      <div style="margin-bottom: 8px;">
+        <span class="material-symbols-outlined" style="font-size: 40px; color: var(--md-sys-color-error);">crisis_alert</span>
+      </div>
+      <h2 style="font-size: 1.3rem; color: var(--md-sys-color-error);" id="guess-imposter-name">Caught</h2>
+      <p style="font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant); margin: 6px 0 14px 0;">
+        You were voted out. Guess the exact secret word from the category to steal the victory:
+      </p>
+
+      <!-- Prominent Category Reminder -->
+      <div class="imposter-category-card" style="border-color: var(--md-sys-color-primary);">
+        <div class="imposter-category-sub" style="color: var(--md-sys-color-primary);">Category</div>
+        <div class="imposter-category-title" id="guess-cat-badge">Nepali Food</div>
+      </div>
+
+      <div class="m3-field-group">
+        <input type="text" id="imposter-guess-input" class="m3-input" placeholder="Type secret word..." />
+      </div>
+
+      <button class="m3-btn m3-btn-primary" onclick="submitImposterGuess()">Submit Guess</button>
+      <button class="m3-btn m3-btn-tonal" style="margin-top:8px;" onclick="finalizeResults(false, false)">I Give Up (Civilians Win)</button>
+    </section>
+
+    <!-- SCREEN 7: RESULTS -->
+    <section id="screen-results" class="screen">
+      <div style="margin-bottom: 8px;">
+        <span class="material-symbols-outlined" id="results-verdict-icon" style="font-size: 48px;">emoji_events</span>
+      </div>
+      <h2 id="results-headline" style="font-size: 1.4rem;">Civilians Win</h2>
+      <p id="results-subtext" style="font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant); margin-bottom: 16px;"></p>
+
+      <div style="background: var(--md-sys-color-surface-container-high); padding: 14px; border-radius: 16px; margin-bottom: 16px;">
+        <div style="font-size:0.75rem; color:var(--md-sys-color-outline); font-weight:700;">SECRET WORD</div>
+        <div style="font-size:1.8rem; font-weight:700; color:var(--md-sys-color-primary);" id="result-secret-word">Momo</div>
+      </div>
+
+      <div id="player-identities-list" style="margin-bottom: 16px; text-align: left;"></div>
+
+      <button class="m3-btn m3-btn-primary" onclick="returnToSetup()">Play Again</button>
+    </section>
+
+    <!-- Custom Category Modal -->
+    <div class="m3-modal" id="custom-modal">
+      <div class="m3-dialog">
+        <h3 style="font-size: 1.15rem; margin-bottom: 14px;">Add Custom Pack</h3>
+        <div class="m3-field-group">
+          <label class="m3-label">Category Title</label>
+          <input type="text" id="custom-cat-title" class="m3-input" placeholder="e.g. Nepali Memes" />
         </div>
-        <div class="form-group">
-          <label>Words (comma-separated)</label>
-          <input type="text" id="custom-cat-words" placeholder="e.g. Word 1, Word 2, Word 3" />
+        <div class="m3-field-group">
+          <label class="m3-label">Words (comma separated)</label>
+          <input type="text" id="custom-cat-words" class="m3-input" placeholder="Word 1, Word 2, Word 3..." />
         </div>
-        <button class="btn" onclick="saveCustomWords()">Save Category</button>
-        <button class="btn btn-secondary" onclick="closeCustomWordModal()">Cancel</button>
+        <div style="display:flex; gap:8px; margin-top:14px;">
+          <button class="m3-btn m3-btn-primary" style="flex:1;" onclick="saveCustomWords()">Save</button>
+          <button class="m3-btn m3-btn-outlined" style="flex:1;" onclick="closeCustomWordModal()">Cancel</button>
+        </div>
       </div>
     </div>
 
   </div>
 
   <script>
-    // 200 Words Bank: 10 Categories x 20 Words each
+    /* Sound Synthesizer */
+    let audioCtx = null;
+    let isMuted = false;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playTone(freq, type = 'sine', duration = 0.1, delay = 0) {
+      if (isMuted) return;
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime + delay);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime + delay);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + delay + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(audioCtx.currentTime + delay);
+        osc.stop(audioCtx.currentTime + delay + duration);
+      } catch (e) {}
+    }
+
+    function playVaultLockSound() {
+      if (isMuted) return;
+      try {
+        initAudio();
+        playTone(160, 'sawtooth', 0.2);
+        playTone(80, 'triangle', 0.35, 0.05);
+      } catch (e) {}
+    }
+
+    function haptic(ms = 35) {
+      if (navigator.vibrate) navigator.vibrate(ms);
+    }
+
+    function toggleMute() {
+      isMuted = !isMuted;
+      document.getElementById('mute-icon').textContent = isMuted ? 'volume_off' : 'volume_up';
+    }
+
+    /* 200 Words Bank (10 Categories x 20 Words) */
     const DEFAULT_WORD_BANK = {
       "Nepali Food": [
         "Momo", "Chowmein", "Chatpate", "Pani Puri", "Sel Roti", 
@@ -548,6 +990,16 @@
       ]
     };
 
+    const SPICE_MODIFIERS = [
+      "Give your clue in exactly ONE word only.",
+      "Say your clue like an angry Nepali Baaje.",
+      "Say your clue without using the letters 'A' or 'M'.",
+      "Make your clue rhyme with your own name.",
+      "Act out your clue using hands only (No speaking).",
+      "Give your clue in pure high-class Shuddha Nepali."
+    ];
+
+    /* Game State */
     let wordBank = { ...DEFAULT_WORD_BANK };
     let playerNames = ["Aayush", "Bipul", "Sita", "Rohan"];
     let imposterCount = 1;
@@ -555,49 +1007,61 @@
     let currentPlayerIndex = 0;
     let selectedCategory = "";
     let selectedWord = "";
-    let isCardRevealed = false;
-    let timerTotalSeconds = 180;
+    let spiceEnabled = false;
+
+    let civilianWins = 0;
+    let imposterWins = 0;
+
+    let timerDuration = 180;
     let timerRemaining = 180;
     let timerInterval = null;
 
-    function initStorage() {
+    let accusedPlayer = null;
+
+    let decryptTimer = null;
+    let decryptProgress = 0;
+    const DECRYPT_DURATION = 1200;
+
+    function initApp() {
       try {
-        const savedPlayers = localStorage.getItem("imposter_players");
-        if (savedPlayers) {
-          playerNames = JSON.parse(savedPlayers);
-        }
-        const savedCustomWords = localStorage.getItem("imposter_custom_words");
-        if (savedCustomWords) {
-          const parsed = JSON.parse(savedCustomWords);
-          wordBank = { ...wordBank, ...parsed };
-          updateCategoryDropdown();
-        }
-      } catch (e) {
-        console.error(e);
-      }
-      renderPlayerList();
+        const saved = localStorage.getItem("nepali_imposter_vault_players");
+        if (saved) playerNames = JSON.parse(saved);
+        const savedCustom = localStorage.getItem("nepali_imposter_vault_custom");
+        if (savedCustom) wordBank = { ...wordBank, ...JSON.parse(savedCustom) };
+      } catch (e) {}
+
+      renderPlayerChips();
+      updateScoreboard();
+      setupSliderWidget();
+      setupDecryptHoldListeners();
     }
 
-    function savePlayersToStorage() {
+    function savePlayers() {
       try {
-        localStorage.setItem("imposter_players", JSON.stringify(playerNames));
+        localStorage.setItem("nepali_imposter_vault_players", JSON.stringify(playerNames));
       } catch (e) {}
     }
 
-    function renderPlayerList() {
-      const container = document.getElementById("players-container");
-      container.innerHTML = "";
+    function updateScoreboard() {
+      document.getElementById('score-counter').textContent = `Civ ${civilianWins} : ${imposterWins} Imp`;
+    }
+
+    function renderPlayerChips() {
+      const box = document.getElementById("players-chip-box");
+      box.innerHTML = "";
       playerNames.forEach((name, idx) => {
         const chip = document.createElement("div");
-        chip.className = "player-chip";
+        chip.className = "m3-chip";
         chip.innerHTML = `
           <span>${name}</span>
-          <span class="remove-btn" onclick="removePlayer(${idx})">&times;</span>
+          <span class="m3-chip-delete" onclick="removePlayer(${idx})">
+            <span class="material-symbols-outlined" style="font-size:16px;">close</span>
+          </span>
         `;
-        container.appendChild(chip);
+        box.appendChild(chip);
       });
-      document.getElementById("player-count-num").textContent = playerNames.length;
-      validateImposterCount();
+      document.getElementById("player-count").textContent = playerNames.length;
+      validateImposters();
     }
 
     function addPlayer() {
@@ -605,13 +1069,14 @@
       const name = input.value.trim();
       if (!name) return;
       if (playerNames.includes(name)) {
-        alert("Player name already exists!");
+        alert("Player name exists!");
         return;
       }
       playerNames.push(name);
       input.value = "";
-      savePlayersToStorage();
-      renderPlayerList();
+      savePlayers();
+      renderPlayerChips();
+      playTone(400, 'sine', 0.08);
     }
 
     document.getElementById("new-player-name").addEventListener("keypress", (e) => {
@@ -620,43 +1085,50 @@
 
     function removePlayer(idx) {
       if (playerNames.length <= 3) {
-        alert("Minimum 3 players are needed!");
+        alert("Minimum 3 players required!");
         return;
       }
       playerNames.splice(idx, 1);
-      savePlayersToStorage();
-      renderPlayerList();
+      savePlayers();
+      renderPlayerChips();
     }
 
     function adjustImposters(delta) {
-      const maxImp = Math.max(1, playerNames.length - 2);
-      imposterCount = Math.max(1, Math.min(maxImp, imposterCount + delta));
-      document.getElementById("val-imposters").textContent = imposterCount;
+      const max = Math.max(1, playerNames.length - 2);
+      imposterCount = Math.max(1, Math.min(max, imposterCount + delta));
+      document.getElementById("imposter-count-val").textContent = imposterCount;
+      playTone(300, 'triangle', 0.05);
     }
 
-    function validateImposterCount() {
-      const maxImp = Math.max(1, playerNames.length - 2);
-      if (imposterCount > maxImp) {
-        imposterCount = maxImp;
-        document.getElementById("val-imposters").textContent = imposterCount;
+    function validateImposters() {
+      const max = Math.max(1, playerNames.length - 2);
+      if (imposterCount > max) {
+        imposterCount = max;
+        document.getElementById("imposter-count-val").textContent = imposterCount;
       }
     }
 
-    function switchScreen(screenId) {
-      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-      document.getElementById(screenId).classList.add("active");
+    function toggleSpiceMode() {
+      spiceEnabled = !spiceEnabled;
+      document.getElementById("spice-label").textContent = spiceEnabled ? "Spice: ON" : "Spice: OFF";
+      playTone(spiceEnabled ? 520 : 280, 'sine', 0.08);
     }
 
+    function switchScreen(id) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+
+    /* Start Match */
     function startGame() {
       if (playerNames.length < 3) {
-        alert("Add at least 3 players to start!");
+        alert("Need at least 3 players!");
         return;
       }
 
-      const catSelect = document.getElementById("category-select").value;
-      const categories = catSelect === "all" ? Object.keys(wordBank) : [catSelect];
+      const catVal = document.getElementById("category-select").value;
+      const categories = catVal === "all" ? Object.keys(wordBank) : [catVal];
       selectedCategory = categories[Math.floor(Math.random() * categories.length)];
-      
       const words = wordBank[selectedCategory];
       selectedWord = words[Math.floor(Math.random() * words.length)];
 
@@ -671,95 +1143,227 @@
       }
 
       currentPlayerIndex = 0;
-      preparePassScreen();
-      switchScreen("screen-pass");
+      showTransitScreen();
     }
 
-    function preparePassScreen() {
-      isCardRevealed = false;
-      const player = roles[currentPlayerIndex];
-      document.getElementById("current-player-label").textContent = player.name;
-      document.getElementById("card-hidden-msg").style.display = "block";
-      document.getElementById("card-content").style.display = "none";
-      
-      const card = document.getElementById("card-display");
-      card.className = "card";
+    /* Transit Screen */
+    function showTransitScreen() {
+      const targetPlayer = roles[currentPlayerIndex];
+      document.getElementById("transit-progress").textContent = `Step ${currentPlayerIndex + 1} of ${roles.length}`;
+      document.getElementById("transit-target-name").textContent = targetPlayer.name;
+      document.getElementById("slider-text").textContent = `Slide to claim as ${targetPlayer.name}`;
 
-      document.getElementById("reveal-toggle-btn").textContent = "Tap to Reveal";
-      document.getElementById("reveal-toggle-btn").style.display = "block";
-      document.getElementById("next-player-btn").style.display = "none";
+      resetSliderWidget();
+      switchScreen("screen-transit");
+      playTone(320, 'sine', 0.1);
     }
 
-    function toggleReveal() {
-      const card = document.getElementById("card-display");
-      const player = roles[currentPlayerIndex];
+    function setupSliderWidget() {
+      const track = document.getElementById("slider-track");
+      const thumb = document.getElementById("slider-thumb");
+      let isDragging = false;
+      let startX = 0;
+      let maxSlide = 0;
 
-      if (!isCardRevealed) {
-        isCardRevealed = true;
-        document.getElementById("card-hidden-msg").style.display = "none";
-        document.getElementById("card-content").style.display = "block";
-        document.getElementById("card-category").textContent = "Category: " + selectedCategory;
+      const onStart = (e) => {
+        isDragging = true;
+        startX = (e.touches ? e.touches[0].clientX : e.clientX);
+        maxSlide = track.clientWidth - thumb.clientWidth - 8;
+        thumb.style.transition = 'none';
+      };
 
-        if (player.role === "imposter") {
-          card.className = "card revealed imposter";
-          document.getElementById("card-word").textContent = "???";
-          document.getElementById("card-word").style.color = "var(--danger)";
-          const badge = document.getElementById("card-role");
-          badge.className = "role-badge imposter";
-          badge.textContent = "⚠️ YOU ARE THE IMPOSTER";
-        } else {
-          card.className = "card revealed civilian";
-          document.getElementById("card-word").textContent = selectedWord;
-          document.getElementById("card-word").style.color = "var(--text)";
-          const badge = document.getElementById("card-role");
-          badge.className = "role-badge civilian";
-          badge.textContent = "Civilian";
+      const onMove = (e) => {
+        if (!isDragging) return;
+        const currentX = (e.touches ? e.touches[0].clientX : e.clientX);
+        let delta = currentX - startX;
+        delta = Math.max(0, Math.min(maxSlide, delta));
+        thumb.style.transform = `translateX(${delta}px)`;
+
+        if (delta >= maxSlide * 0.82) {
+          isDragging = false;
+          thumb.style.transform = `translateX(${maxSlide}px)`;
+          haptic(50);
+          playTone(580, 'sine', 0.15);
+          setTimeout(onDeviceClaimed, 150);
         }
+      };
 
-        document.getElementById("reveal-toggle-btn").textContent = "Hide Card & Pass";
-      } else {
-        document.getElementById("card-hidden-msg").innerHTML = "<p>✅ Role memorized. Pass to next player!</p>";
-        document.getElementById("card-hidden-msg").style.display = "block";
-        document.getElementById("card-content").style.display = "none";
-        card.className = "card";
+      const onEnd = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        thumb.style.transition = 'transform 0.25s cubic-bezier(0, 0, 0.2, 1)';
+        thumb.style.transform = 'translateX(0px)';
+      };
 
-        document.getElementById("reveal-toggle-btn").style.display = "none";
-        document.getElementById("next-player-btn").style.display = "block";
+      thumb.addEventListener("touchstart", onStart, { passive: true });
+      window.addEventListener("touchmove", onMove, { passive: true });
+      window.addEventListener("touchend", onEnd);
+
+      thumb.addEventListener("mousedown", onStart);
+      window.addEventListener("mousemove", onMove);
+      window.addEventListener("mouseup", onEnd);
+    }
+
+    function resetSliderWidget() {
+      const thumb = document.getElementById("slider-thumb");
+      thumb.style.transition = 'none';
+      thumb.style.transform = 'translateX(0px)';
+    }
+
+    /* Decrypt Screen */
+    function onDeviceClaimed() {
+      const player = roles[currentPlayerIndex];
+      document.getElementById("decrypt-progress").textContent = `${player.name}'s Identity`;
+      document.getElementById("decrypt-title").textContent = `Confidential Deck`;
+
+      const deck = document.getElementById("decrypt-deck");
+      deck.className = "m3-decrypt-deck";
+      document.getElementById("scanner-view").style.display = "block";
+      document.getElementById("secret-payload").style.display = "none";
+      document.getElementById("btn-burn-turn").style.display = "none";
+      document.getElementById("decrypt-hint").textContent = "Press and hold firmly to decrypt";
+
+      const circle = document.getElementById("scanner-progress");
+      circle.style.strokeDashoffset = "251.2";
+
+      switchScreen("screen-decrypt");
+    }
+
+    function setupDecryptHoldListeners() {
+      const deck = document.getElementById("decrypt-deck");
+
+      const onStart = (e) => {
+        e.preventDefault();
+        beginDecryption();
+      };
+
+      const onEnd = (e) => {
+        e.preventDefault();
+        cancelDecryption();
+      };
+
+      deck.addEventListener("touchstart", onStart, { passive: false });
+      deck.addEventListener("touchend", onEnd);
+      deck.addEventListener("touchcancel", onEnd);
+
+      deck.addEventListener("mousedown", onStart);
+      deck.addEventListener("mouseup", onEnd);
+      deck.addEventListener("mouseleave", onEnd);
+    }
+
+    function beginDecryption() {
+      const player = roles[currentPlayerIndex];
+      const isImp = player.role === "imposter";
+      const deck = document.getElementById("decrypt-deck");
+      const circle = document.getElementById("scanner-progress");
+
+      let startTime = Date.now();
+      decryptProgress = 0;
+
+      playTone(280, 'sine', 0.08);
+
+      clearInterval(decryptTimer);
+      decryptTimer = setInterval(() => {
+        let elapsed = Date.now() - startTime;
+        let pct = Math.min(1, elapsed / DECRYPT_DURATION);
+        circle.style.strokeDashoffset = (251.2 * (1 - pct)).toString();
+
+        if (pct < 1) {
+          if (elapsed % 250 < 40) {
+            haptic(20);
+            playTone(300 + pct * 240, 'triangle', 0.04);
+          }
+        } else {
+          clearInterval(decryptTimer);
+          deck.classList.add("unlocked");
+          if (isImp) deck.classList.add("imposter-unlocked");
+
+          document.getElementById("scanner-view").style.display = "none";
+          document.getElementById("secret-payload").style.display = "block";
+
+          if (isImp) {
+            document.getElementById("civilian-payload-view").style.display = "none";
+            document.getElementById("imposter-payload-view").style.display = "block";
+            document.getElementById("imposter-cat-title").textContent = selectedCategory;
+
+            playTone(190, 'sawtooth', 0.25);
+            haptic(80);
+          } else {
+            document.getElementById("imposter-payload-view").style.display = "none";
+            document.getElementById("civilian-payload-view").style.display = "block";
+            document.getElementById("payload-cat").textContent = `Category: ${selectedCategory}`;
+            document.getElementById("payload-word").textContent = selectedWord;
+
+            playTone(520, 'sine', 0.12);
+            playTone(650, 'sine', 0.15, 0.08);
+            haptic(40);
+          }
+
+          document.getElementById("btn-burn-turn").style.display = "inline-flex";
+          document.getElementById("decrypt-hint").textContent = "Memorized. You must Burn Identity to pass.";
+        }
+      }, 30);
+    }
+
+    function cancelDecryption() {
+      clearInterval(decryptTimer);
+      const circle = document.getElementById("scanner-progress");
+      circle.style.strokeDashoffset = "251.2";
+
+      const deck = document.getElementById("decrypt-deck");
+      if (deck.classList.contains("unlocked")) {
+        deck.className = "m3-decrypt-deck";
+        document.getElementById("scanner-view").style.display = "block";
+        document.getElementById("secret-payload").style.display = "none";
+        document.getElementById("decrypt-hint").textContent = "Card concealed. Tap 'Burn & Lock' to pass.";
       }
     }
 
-    function nextPlayer() {
+    function burnTurnAndLock() {
+      playVaultLockSound();
+      haptic(70);
+
       currentPlayerIndex++;
       if (currentPlayerIndex < roles.length) {
-        preparePassScreen();
+        showTransitScreen();
       } else {
-        startDiscussion();
+        startDiscussionRound();
       }
     }
 
-    function startDiscussion() {
+    /* Discussion Phase */
+    function startDiscussionRound() {
+      document.getElementById("discussion-cat-badge").textContent = `Category: ${selectedCategory}`;
+
       const shuffled = [...roles].sort(() => 0.5 - Math.random());
-      const orderList = document.getElementById("speaking-order-list");
-      orderList.innerHTML = "";
-      shuffled.forEach((p, index) => {
-        const item = document.createElement("div");
-        item.className = "order-item";
-        item.innerHTML = `
-          <div class="order-num">${index + 1}</div>
-          <div style="font-weight: 600;">${p.name}</div>
+      const orderBox = document.getElementById("order-container");
+      orderBox.innerHTML = "";
+      shuffled.forEach((p, idx) => {
+        const row = document.createElement("div");
+        row.className = "order-row";
+        row.innerHTML = `
+          <span><b>${idx + 1}.</b> ${p.name}</span>
+          <span style="font-size:0.75rem; color:var(--md-sys-color-outline);">Gives clue</span>
         `;
-        orderList.appendChild(item);
+        orderBox.appendChild(row);
       });
 
-      document.getElementById("discussion-category").textContent = "Category: " + selectedCategory;
+      const modBox = document.getElementById("modifier-box");
+      if (spiceEnabled) {
+        modBox.style.display = "flex";
+        const randomSpice = SPICE_MODIFIERS[Math.floor(Math.random() * SPICE_MODIFIERS.length)];
+        document.getElementById("modifier-text").textContent = randomSpice;
+      } else {
+        modBox.style.display = "none";
+      }
 
       const duration = parseInt(document.getElementById("timer-duration-select").value);
-      const timerWrapper = document.getElementById("timer-wrapper");
+      const timerBox = document.getElementById("timer-box");
       if (duration === 0) {
-        timerWrapper.style.display = "none";
+        timerBox.style.display = "none";
       } else {
-        timerWrapper.style.display = "block";
-        timerTotalSeconds = duration;
+        timerBox.style.display = "block";
+        timerDuration = duration;
         timerRemaining = duration;
         updateTimerDisplay();
         startTimerInterval();
@@ -780,18 +1384,24 @@
         if (timerRemaining > 0) {
           timerRemaining--;
           updateTimerDisplay();
+          if (timerRemaining <= 5 && timerRemaining > 0) {
+            playTone(600, 'sine', 0.05);
+          } else if (timerRemaining === 0) {
+            playTone(220, 'sawtooth', 0.4);
+            haptic(100);
+          }
         } else {
           clearInterval(timerInterval);
         }
       }, 1000);
-      document.getElementById("timer-btn").textContent = "Pause";
+      document.getElementById("btn-timer-toggle").innerHTML = `<span class="material-symbols-outlined">pause</span> Pause`;
     }
 
     function toggleTimer() {
       if (timerInterval) {
         clearInterval(timerInterval);
         timerInterval = null;
-        document.getElementById("timer-btn").textContent = "Resume";
+        document.getElementById("btn-timer-toggle").innerHTML = `<span class="material-symbols-outlined">play_arrow</span> Resume`;
       } else {
         startTimerInterval();
       }
@@ -799,29 +1409,101 @@
 
     function resetTimer() {
       clearInterval(timerInterval);
-      timerRemaining = timerTotalSeconds;
+      timerRemaining = timerDuration;
       updateTimerDisplay();
-      startTimerInterval();
+      document.getElementById("btn-timer-toggle").innerHTML = `<span class="material-symbols-outlined">play_arrow</span> Start`;
     }
 
-    function revealResults() {
+    /* Voting & Guess */
+    function goToVoting() {
       clearInterval(timerInterval);
-      document.getElementById("result-word").textContent = selectedWord;
-
-      const list = document.getElementById("results-list");
-      list.innerHTML = "";
+      const grid = document.getElementById("vote-grid");
+      grid.innerHTML = "";
 
       roles.forEach(p => {
-        const item = document.createElement("div");
-        item.style.cssText = "padding: 10px; border-radius: 8px; background: var(--panel-bg); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;";
+        const btn = document.createElement("div");
+        btn.className = "vote-item";
+        btn.textContent = p.name;
+        btn.onclick = () => selectVotedPlayer(p);
+        grid.appendChild(btn);
+      });
+
+      switchScreen("screen-voting");
+      playTone(320, 'triangle', 0.1);
+    }
+
+    function selectVotedPlayer(player) {
+      accusedPlayer = player;
+      if (player.role === "imposter") {
+        document.getElementById("guess-imposter-name").textContent = `${player.name} was Caught`;
+        document.getElementById("guess-cat-badge").textContent = selectedCategory;
+        document.getElementById("imposter-guess-input").value = "";
+        switchScreen("screen-guess");
+        playTone(300, 'sine', 0.2);
+      } else {
+        finalizeResults(false, true);
+      }
+    }
+
+    function submitImposterGuess() {
+      const input = document.getElementById("imposter-guess-input").value.trim().toLowerCase();
+      const target = selectedWord.toLowerCase();
+
+      if (input && (target.includes(input) || input.includes(target))) {
+        finalizeResults(true, false);
+      } else {
+        finalizeResults(false, false);
+      }
+    }
+
+    /* Results */
+    function finalizeResults(imposterStoleWin, civilianEliminatedMistake) {
+      clearInterval(timerInterval);
+      document.getElementById("result-secret-word").textContent = selectedWord;
+
+      const icon = document.getElementById("results-verdict-icon");
+      const headline = document.getElementById("results-headline");
+      const subtext = document.getElementById("results-subtext");
+
+      if (imposterStoleWin) {
+        imposterWins++;
+        icon.textContent = "crisis_alert";
+        headline.textContent = "Imposter Steals Win";
+        headline.style.color = "var(--md-sys-color-error)";
+        subtext.textContent = `${accusedPlayer.name} correctly guessed the secret word from the category hint.`;
+        playTone(350, 'sawtooth', 0.3);
+      } else if (civilianEliminatedMistake) {
+        imposterWins++;
+        icon.textContent = "cancel";
+        headline.textContent = "Imposters Win";
+        headline.style.color = "var(--md-sys-color-error)";
+        subtext.textContent = `The group voted out ${accusedPlayer.name}, who was an innocent Civilian.`;
+        playTone(200, 'sawtooth', 0.35);
+      } else {
+        civilianWins++;
+        icon.textContent = "emoji_events";
+        headline.textContent = "Civilians Win";
+        headline.style.color = "var(--md-sys-color-success)";
+        subtext.textContent = `The group caught ${accusedPlayer.name} and defended the secret.`;
+        playTone(520, 'sine', 0.15);
+        playTone(650, 'sine', 0.2, 0.1);
+      }
+
+      updateScoreboard();
+
+      const list = document.getElementById("player-identities-list");
+      list.innerHTML = "";
+      roles.forEach(p => {
+        const row = document.createElement("div");
+        row.style.cssText = "display:flex; justify-content:space-between; padding:8px 12px; background:var(--md-sys-color-surface-container-high); border-radius:10px; margin-bottom:6px; font-size:0.9rem;";
         const isImp = p.role === "imposter";
-        item.innerHTML = `
-          <span style="font-weight:600;">${p.name}</span>
-          <span style="font-weight:700; color: ${isImp ? 'var(--danger)' : 'var(--success)'}">
-            ${isImp ? '⚠️ Imposter' : 'Civilian'}
+        row.innerHTML = `
+          <span><b>${p.name}</b></span>
+          <span style="font-weight:700; color:${isImp ? 'var(--md-sys-color-error)' : 'var(--md-sys-color-success)'}">
+            ${isImp ? 'Imposter' : 'Civilian'}
           </span>
         `;
-        list.appendChild(item);
+        list.appendChild(row);
       });
 
       switchScreen("screen-results");
@@ -831,6 +1513,7 @@
       switchScreen("screen-setup");
     }
 
+    /* Custom Category */
     function openCustomWordModal() {
       document.getElementById("custom-modal").classList.add("active");
     }
@@ -840,45 +1523,41 @@
     }
 
     function saveCustomWords() {
-      const cat = document.getElementById("custom-cat-name").value.trim();
-      const rawWords = document.getElementById("custom-cat-words").value.trim();
-      if (!cat || !rawWords) {
-        alert("Please enter both category name and words!");
+      const title = document.getElementById("custom-cat-title").value.trim();
+      const raw = document.getElementById("custom-cat-words").value.trim();
+
+      if (!title || !raw) {
+        alert("Enter title and words!");
         return;
       }
 
-      const words = rawWords.split(",").map(w => w.trim()).filter(w => w.length > 0);
+      const words = raw.split(",").map(w => w.trim()).filter(w => w.length > 0);
       if (words.length < 2) {
-        alert("Please add at least 2 words!");
+        alert("Enter at least 2 words!");
         return;
       }
 
-      wordBank[cat] = words;
-
+      wordBank[title] = words;
       try {
-        const savedCustomWords = JSON.parse(localStorage.getItem("imposter_custom_words") || "{}");
-        savedCustomWords[cat] = words;
-        localStorage.setItem("imposter_custom_words", JSON.stringify(savedCustomWords));
+        const saved = JSON.parse(localStorage.getItem("nepali_imposter_vault_custom") || "{}");
+        saved[title] = words;
+        localStorage.setItem("nepali_imposter_vault_custom", JSON.stringify(saved));
       } catch (e) {}
 
-      updateCategoryDropdown();
-      closeCustomWordModal();
-      document.getElementById("custom-cat-name").value = "";
-      document.getElementById("custom-cat-words").value = "";
-    }
-
-    function updateCategoryDropdown() {
       const select = document.getElementById("category-select");
-      select.innerHTML = '<option value="all">🎲 All Categories (Random 200 Words)</option>';
-      Object.keys(wordBank).forEach(cat => {
-        const opt = document.createElement("option");
-        opt.value = cat;
-        opt.textContent = cat;
-        select.appendChild(opt);
-      });
+      const opt = document.createElement("option");
+      opt.value = title;
+      opt.textContent = title;
+      select.appendChild(opt);
+      select.value = title;
+
+      closeCustomWordModal();
+      document.getElementById("custom-cat-title").value = "";
+      document.getElementById("custom-cat-words").value = "";
+      playTone(550, 'sine', 0.1);
     }
 
-    initStorage();
+    initApp();
   </script>
 </body>
 </html>
